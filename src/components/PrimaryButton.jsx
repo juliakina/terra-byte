@@ -20,7 +20,9 @@ const styles = StyleSheet.create({
         borderRadius: 14,
         alignItems: 'center',
         justifyContent: 'center',
+        alignSelf: 'center',
         marginTop: 8,
+        width:100,
     },
     disabled: {
         opacity: 0.6,

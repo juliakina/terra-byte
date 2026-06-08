@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Link, router } from 'expo-router';
 import { useState } from 'react';
-import { Alert, KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { CustomInput } from '../src/components/CustomInput';
 import { PrimaryButton } from '../src/components/PrimaryButton';
 import { colors } from '../src/constants/colors';
@@ -36,12 +36,12 @@ export default function LoginScreen() {
                 <View style={styles.container}>
                     <View style={styles.logoContainer}>
                         <Image
-                            source={require('../assets/logo.jpeg')}
+                            source={require('../assets/logo.png')}
                             style={styles.logo}
                             resizeMode="contain"/>
-                        <Text style={styles.title}>Acesse sua conta</Text>
+                        <Text style={styles.title}>Acesse sua Conta</Text>
                         <Text style={styles.subtitle}>
-                        Entre para continuar no TerraByte
+                        Entre para continuar no TerraByte!
                         </Text>
                     </View>
 
@@ -58,22 +58,17 @@ export default function LoginScreen() {
                             value={password}
                             onChangeText={setPassword}
                             secureTextEntry/>
-                        <TouchableOpacity
-                            style={styles.forgotPassword}
-                            onPress={() => router.push('/forgot-password')}>
-                            <Text style={styles.forgotPasswordText}>Esqueci minha senha</Text>
-                        </TouchableOpacity>
                         <PrimaryButton
                             title={isLoading ? 'Entrando...' : 'Entrar'}
                             onPress={handleLogin}
                             disabled={isLoading}/>
                     </View>
 
-                    <View style={styles.footer}>
-                        <Text style={styles.footerText}>Não tem conta? </Text>
+                    <View style={styles.register}>
+                        <Text style={styles.registerText}>Não tem conta? </Text>
                         <Link href="/register" asChild>
                             <TouchableOpacity>
-                                <Text style={styles.footerLink}>Cadastre-se!</Text>
+                                <Text style={styles.registerLink}>Cadastre-se!</Text>
                             </TouchableOpacity>
                         </Link>
                     </View>
@@ -118,24 +113,16 @@ const styles = StyleSheet.create({
     form: {
         width: '100%',
     },
-    forgotPassword: {
-        alignSelf: 'flex-end',
-        marginBottom: 12,
-    },
-    forgotPasswordText: {
-        color: colors.primary,
-        fontWeight: '600',
-    },
-    footer: {
+    register: {
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 28,
     },
-    footerText: {
+    registerText: {
         color: colors.mutedText,
         fontSize: 15,
     },
-    footerLink: {
+    registerLink: {
         color: colors.primary,
         fontWeight: '700',
         fontSize: 15,
