@@ -38,7 +38,7 @@ export default function RegisterScreen() {
                     keyboardShouldPersistTaps="handled">
                     <View style={styles.header}>
                         <Image
-                            source={require('../assets/logo.jpeg')}
+                            source={require('../assets/logo.png')}
                             style={styles.logo}
                             resizeMode="contain"/>
                         <Text style={styles.title}>Crie sua Conta</Text>
