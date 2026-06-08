@@ -41,8 +41,8 @@ export default function RegisterScreen() {
                             source={require('../assets/logo.jpeg')}
                             style={styles.logo}
                             resizeMode="contain"/>
-                        <Text style={styles.title}>Crie sua conta</Text>
-                        <Text style={styles.subtitle}>Cadastre-se para acessar o TerraByte</Text>
+                        <Text style={styles.title}>Crie sua Conta</Text>
+                        <Text style={styles.subtitle}>Cadastre-se para acessar o TerraByte!</Text>
                     </View>
 
                     <View style={styles.form}>
@@ -68,9 +68,7 @@ export default function RegisterScreen() {
 
                     <View style={styles.login}>
                         <Text style={styles.loginText}>Já tem conta? </Text>
-                        <TouchableOpacity onPress={() => router.replace('/login')}>
-                            <Text style={styles.loginLink}>Entre!</Text>
-                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => router.replace('/login')}><Text style={styles.loginLink}>Entre!</Text></TouchableOpacity>
                     </View>
                 </ScrollView>
             </KeyboardAvoidingView>
