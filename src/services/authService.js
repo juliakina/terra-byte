@@ -10,3 +10,14 @@ export async function loginUser(email, password) {
     }
     throw new Error('E-mail ou senha inválidos.');
 }
+
+export async function registerUser(userData) {
+    return {
+        accessToken: 'mock-access-token',
+        refreshToken: 'mock-refresh-token',
+        user: {
+            id: Date.now(),
+            ...userData,
+        },
+    };
+}
