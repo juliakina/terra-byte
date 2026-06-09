@@ -1,12 +1,11 @@
-import { Link, router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Image, KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { CustomInput } from '../src/components/CustomInput';
-import { PrimaryButton } from '../src/components/PrimaryButton';
-import { colors } from '../src/constants/colors';
-import { loginUser } from '../src/services/authService';
+import { CustomInput } from '../components/CustomInput';
+import { PrimaryButton } from '../components/PrimaryButton';
+import { colors } from '../constants/colors';
+import { loginUser } from '../services/authService';
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState('teste@email.com');
     const [password, setPassword] = useState('123456');
     const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +18,7 @@ export default function LoginScreen() {
         try {
             setIsLoading(true);
             await loginUser(email, password);
-            router.replace('/home');
+            navigation.replace('Home');
         } catch (error) {
             Alert.alert('Erro no login', error.message);
         } finally {
@@ -35,7 +34,7 @@ export default function LoginScreen() {
                 <View style={styles.container}>
                     <View style={styles.logoContainer}>
                         <Image
-                            source={require('../assets/logo.png')}
+                            source={require('../../assets/logo.png')}
                             style={styles.logo}
                             resizeMode="contain"/>
                         <Text style={styles.title}>Acesse sua Conta</Text>
@@ -65,7 +64,7 @@ export default function LoginScreen() {
 
                     <View style={styles.register}>
                         <Text style={styles.registerText}>Não tem conta? </Text>
-                        <TouchableOpacity onPress={() => router.push("/register")}><Text style={styles.link}>Cadastre-se!</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('Register')}><Text style={styles.registerLink}>Cadastre-se!</Text></TouchableOpacity>
                     </View>
                 </View>
             </KeyboardAvoidingView>

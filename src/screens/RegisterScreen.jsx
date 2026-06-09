@@ -1,12 +1,11 @@
-import { router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Image, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { CustomInput } from '../src/components/CustomInput';
-import { PrimaryButton } from '../src/components/PrimaryButton';
-import { colors } from '../src/constants/colors';
-import { registerUser } from '../src/services/authService';
+import { CustomInput } from '../components/CustomInput';
+import { PrimaryButton } from '../components/PrimaryButton';
+import { colors } from '../constants/colors';
+import { registerUser } from '../services/authService';
 
-export default function RegisterScreen() {
+export default function RegisterScreen({ navigation }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,15 +15,30 @@ export default function RegisterScreen() {
             Alert.alert('Atenção', 'Preencha todos os campos.');
             return;
         }
+
         if (password.length < 6) {
             Alert.alert('Atenção', 'A senha deve ter pelo menos 6 caracteres.');
             return;
         }
+
         try {
-            Alert.alert('Sucesso', 'Cadastro criado com sucesso.');
-            router.replace('/login');
+            await registerUser({
+                name,
+                email,
+                password,
+            });
+
+            Alert.alert(
+                'Sucesso',
+                'Cadastro criado com sucesso.'
+            );
+
+            navigation.replace('Login');
         } catch (error) {
-            Alert.alert('Erro no cadastro', error.message);
+            Alert.alert(
+                'Erro no cadastro',
+                error.message
+            );
         }
     }
 
@@ -38,7 +52,7 @@ export default function RegisterScreen() {
                     keyboardShouldPersistTaps="handled">
                     <View style={styles.header}>
                         <Image
-                            source={require('../assets/logo.png')}
+                            source={require('../../assets/logo.png')}
                             style={styles.logo}
                             resizeMode="contain"/>
                         <Text style={styles.title}>Crie sua Conta</Text>
@@ -68,7 +82,7 @@ export default function RegisterScreen() {
 
                     <View style={styles.login}>
                         <Text style={styles.loginText}>Já tem conta? </Text>
-                        <TouchableOpacity onPress={() => router.replace('/login')}><Text style={styles.loginLink}>Entre!</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.replace('Login')}><Text style={styles.loginLink}>Entre!</Text></TouchableOpacity>
                     </View>
                 </ScrollView>
             </KeyboardAvoidingView>
@@ -94,9 +108,9 @@ const styles = StyleSheet.create({
         marginBottom: 28,
     },
     logo: {
-        width: 130,
-        height: 130,
-        marginBottom: 16,
+        width: 180,
+        height: 180,
+        marginBottom: 24,
     },
     title: {
         fontSize: 26,
