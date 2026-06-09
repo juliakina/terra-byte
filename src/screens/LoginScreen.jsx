@@ -17,8 +17,10 @@ export default function LoginScreen({ navigation }) {
         }
         try {
             setIsLoading(true);
-            await loginUser(email, password);
-            navigation.replace('Home');
+            const response = await loginUser(email, password);
+            navigation.replace('Drawer', {
+                user: response.user,
+            });
         } catch (error) {
             Alert.alert('Erro no login', error.message);
         } finally {
